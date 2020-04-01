@@ -41,6 +41,7 @@ public class JavaIOReportRepositoryImpl implements ReportRepository {
             }
         } else {
             System.out.println("There are no reports in the list yet");
+            return null;
         }
         return getReportsAsList();
     }
@@ -81,9 +82,8 @@ public class JavaIOReportRepositoryImpl implements ReportRepository {
     @Override
     public void save(Report report) {
         if (report != null) {
-
-            Long id = report.getReportID();
-            String name = report.getReportName();
+            Long id = report.getId();
+            String name = report.getName();
             String status = report.getReportStatus().toString();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/reports.txt", true))) {
                 writer.write(id + "," + name + "," + status + "\n");
@@ -111,7 +111,7 @@ public class JavaIOReportRepositoryImpl implements ReportRepository {
             Long id;
             if (!getReportsAsList().isEmpty()) {
                 Optional<Long> max = getReportsAsList().stream()
-                        .map(s -> s.getReportID())
+                        .map(s -> s.getId())
                         .max((o1, o2) -> o1.compareTo(o2));
                 if (max.isPresent()) {
                     id = max.get() + 1;

@@ -1,22 +1,20 @@
 package main.java.com.mkaloshyn.javaio.chapter0304.myApp.view;
 
-import java.util.Scanner;
+import main.java.com.mkaloshyn.javaio.chapter0304.myApp.controller.ReportController;
 
 public class ReportView {
 
-        public int askForChoice() {
+    private ReportController reportController = new ReportController();
 
-        int choice;
-        Scanner scanner = new Scanner(System.in);
+    public void getById(long i) {
+        reportController.getById(i);
+    }
 
-        System.out.println("__________________________________\n" +
-                "Please choose the action needed:\n" +
-                "1 - read report by ID;\n" +
-                "2 - read all reports;\n" +
-                "3 - add report;\n" +
-                "4- terminate."
-        );
-        choice = scanner.nextInt();
-        return choice;
+    public void getAll() {
+        reportController.getAll();
+    }
+
+    public void save(String reportName, String repStatus) {
+        reportController.save(reportName, repStatus);
     }
 }
